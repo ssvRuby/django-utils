@@ -1,0 +1,11 @@
+<ul>
+  {% for item in menu_items %}
+    <li class="{% if item.is_active %}active{% elif item.is_ancestor %}open{% endif %}">
+      <a href="{{ item.resolved_url  }}">{{ item.title }}</a>
+
+      {% if item.show_children and item.children.all %}
+        {% include "navigation/menu.html" with menu_items=item.children.all %}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
